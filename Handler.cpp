@@ -1,12 +1,32 @@
-#ifndef Handler_H
-#define Handler_H
+#include "Handler.h"
+#include <iostream>
 
-class Handler {
-	// Private section
-	public:
-		// Public Declarations
-	protected:
-		// Protected Declarations
-};
+using namespace std;
 
-#endif
+Handler::Handler(){
+	
+}
+
+void Handler::openmat(){
+	
+}
+
+void Handler::writemat(){
+	
+}
+
+void Handler::openalumn(){
+	
+}
+
+void Handler::writealumn(){
+	
+}
+
+void Handler::openinscritos(){
+	
+}
+
+void Handler::writeinscritos(){
+	
+}
