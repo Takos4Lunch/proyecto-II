@@ -11,9 +11,10 @@ class Semestre {
 		int ced;
 		fstream y;
 		Semestre();
+		Semestre(int cd,int ce);
 		void save(int cd,int ce);
-		void load();
-		
+		void load(Semestre **smtr,int contsemst);
+		void print();
 		//Vamos a hacer los metodos a ver si sirve njd
 		// Public Declarations
 	protected:
