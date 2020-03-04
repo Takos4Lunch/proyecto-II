@@ -16,19 +16,20 @@ Materia::Materia(int cd,char tt[80], char ucc[0]){
 	strcpy(uc,ucc);
 }
 
-void Materia::save(int cd, char tt[80],char *uc,Materia **mat,int contmater){
+void Materia::save(int cd, char tt[80],char *uc,Materia **mat,int& contmater){
 	string jumpsuit = "\r\r\n";
+	mat[contmater] = new Materia(cd,tt,uc);
+	mat[contmater]->print();
+	contmater++;
 	y.open("Materia.dat",ios::binary|ios::out|ios::app);
 	y.write((char *)&cd,sizeof(cd));
 	y.write((char *)tt,80);
 	y.write((char *)uc,1);
 	y.write((char *)&jumpsuit,3);
-	mat[contmater] = new Materia(cd,tt,uc);
-	contmater++;
 	y.close();
 }
 
-void Materia::load(Materia **mat,int contmater){
+void Materia::load(Materia **mat,int& contmater){
 	int p = 111;
 	int sav = 0;
 	char temp[80];
@@ -36,15 +37,16 @@ void Materia::load(Materia **mat,int contmater){
 	int placeholder;
 	y.open("Materia.dat",ios::binary|ios::in);
 	contmater = 0;
-	int unidades = 0;
 	do{
 		y.read((char *)&sav,sizeof(p));
 		y.read((char *)&temp,sizeof(temp));
 		y.read(uc,1);
 		y.read((char*)&placeholder,3);
+		cout<<"codigo"<<sav<<endl;
 		//unidades = atoi(uc);
 		//Gentil recordatorio de que igual sirve con atoi
 		mat[contmater] = new Materia(sav,temp,uc);
+		mat[contmater]->print();
 		contmater++;
 	}while(!y.fail());
 	y.close();

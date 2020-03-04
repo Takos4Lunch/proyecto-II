@@ -13,16 +13,18 @@ Alumno::Alumno(int x, char z[30]){
 	strcpy(nom,z);
 }
 
-void Alumno::save(int x,char z[30]){
+void Alumno::save(int x,char z[30],Alumno **al,int& contalumn){
 	string jumpsuit = "\r\n";
 	y.open("Datos.dat",ios::binary|ios::out|ios::app);
 	y.write((char *)&x,sizeof(x));
 	y.write((char *)z,30);
 	y.write((char *)&jumpsuit,2);
+	al[contalumn] = new Alumno(x,z);
+	contalumn++;
 	y.close();
 }
 
-void Alumno::load(Alumno **al,int contalumn){//Quizas debería pasarle un array de alumnos para que los guarde
+void Alumno::load(Alumno **al,int& contalumn){//Quizas debería pasarle un array de alumnos para que los guarde
 	
 	int p = 11111111;
 	char x[sizeof(p)];
@@ -30,7 +32,7 @@ void Alumno::load(Alumno **al,int contalumn){//Quizas debería pasarle un array d
 	int sav = 0;
 	int placeholder;
 	y.open("Datos.dat",ios::binary | ios::in);
-	contalumn = 0;
+	contalumn;
 	do
 	{
 		y.read((char *)&sav,sizeof(p));

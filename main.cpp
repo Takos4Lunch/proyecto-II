@@ -35,6 +35,10 @@ int main(int argc, char** argv) {
 	j.load(matr,contmtr);
 	i.load(smtr,contsmtr);
 	
+	cout<<"Alumnos :"<<contalm<<endl;
+	cout<<"Materias :"<<contmtr<<endl;
+	cout<<"Inscripciones :"<<contsmtr<<endl;
+	
 	//Con todo cargado, procedemos a hacer todo
 	
 	cout<<"Bienvenido al programa"<<endl;
@@ -64,15 +68,20 @@ int main(int argc, char** argv) {
 				
 				if(value==1){
 					cout<<"Ingrese el codigo de la materia (3 digitos)"<<endl;
-					int codigo = 0;
 					char nombr[80];
+					int codigo = 0;
+					
 					do{
+						fflush(stdin);
 						cin>>codigo;
-						if(codigo>999 || codigo<100){
+						cout<<codigo<<endl;
+						if(codigo>999 || codigo<1){
 							cout<<"Ingrese un valor valido"<<endl;
 						}
-					}while(codigo>999 || codigo<100);
-					cout<<"Ahora, ingrese el nombre de la materia(máximo 80 caracteres"<<endl;
+					}while(codigo>999 || codigo<1);
+					cout<<codigo<<endl;
+					int helper = codigo;
+					cout<<"Ahora, ingrese el nombre de la materia(máximo 80 caracteres)"<<endl;
 					cin>>nombr;
 					cout<<"Por ultimo, ingrese la cantidad de unidades de crédito (de 1 a 4)"<<endl;
 					int uncred = 0;
@@ -86,19 +95,177 @@ int main(int argc, char** argv) {
 					}while(uncred>4 || uncred<1);
 				
 					//Teniendo todo eso, guardamos
-					j.save(codigo,nombr,ucred,matr,contmtr);//Listo
+					cout<<"Codigo"<<codigo;
+					j.save(helper,nombr,ucred,matr,contmtr);//Listo
 				}else{
-					
+					//Alumno
+					cout<<"Ingrese la cedula del alumno (8 caracteres)"<<endl;
+					int cedula = 0;
+					do{
+						cin>>cedula;
+						if(cedula>99999999 || cedula<10000000){
+							cout<<"Ingrese un valor valido"<<endl;
+						}
+					}while(cedula>99999999 || cedula<10000000);
+					cout<<"Ahora, ingrese el nombre del estudiante(30 caracteres)"<<endl;
+					char nombr[30];
+					fflush(stdin);
+					cin.getline(nombr,sizeof(nombr));
+					h.save(cedula,nombr,alm,contalm);//listo
 				}
 			}
 				
 				
 				break;
 			case 2://Realizar inscripcion
+				{
+					cout<<"Ingrese la cedula del alumno(8 caracteres)"<<endl;
+					//Hay que verificar si la cedula existe
+					int cedula = 0;
+					do{
+						cin>>cedula;
+						if(cedula>99999999 || cedula<10000000){
+							cout<<"Ingrese un valor valido"<<endl;
+						}
+					}while(cedula>99999999 || cedula<10000000);
+					
+					bool existe = false;
+					for(int x = 0;x<contalm;x++){
+						if(cedula==alm[x]->ced){
+							existe = true;
+							cout<<"Fue encontrado"<<endl;
+						}
+					}
+					
+					cout<<"Ahora, ingrese el codigo de la materia(3 caracteres)"<<endl;
+					
+					int codigo = 0;
+					
+					do{
+						cin>>codigo;
+						if(codigo>999 || codigo<1){
+							cout<<"Ingrese un valor valido"<<endl;
+						}
+					}while(codigo>999 || codigo<1);
+					
+					bool codexiste = false;
+					for(int x = 0;x<contmtr;x++){
+						if(codigo==matr[x]->cod){
+							codexiste = true;
+							cout<<"Fue encontrad2"<<endl;
+						}
+					}
+					
+					if(existe==true && codexiste==true){
+						cout<<"Existen"<<endl;
+						i.save(codigo,cedula,smtr,contsmtr);
+					}else{
+						
+					}
+					
+				}
 				break;
 			case 3://Consultar datos
+				{
+					cout<<"¿Que desea consultar?"<<endl;
+				int value = 0;
+				do{
+					cout<<"1- Materia"<<endl;
+					cout<<"2- Alumno"<<endl;
+					
+					cin>>value;	
+					if(value>2 || value<1){
+						cout<<"Ingrese una opcion valida"<<endl;
+					}
+				}while(value>2 || value<1);
+				
+					if(value==1){//Materia
+						cout<<"Ingrese el codigo de la materia"<<endl;
+						int codigo = 0;
+						do{
+							cin>>codigo;
+							if(codigo>999 || codigo<1){
+								cout<<"Ingrese un valor valido"<<endl;
+							}
+						}while(codigo>999 || codigo<1);
+						
+						bool codexiste = false;
+						for(int x = 0;x<contmtr;x++){
+							if(codigo==matr[x]->cod){
+								codexiste = true;
+								matr[x]->print();
+							}
+						}
+						
+						if(codexiste == false){
+							cout<<"No existe la materia"<<endl;
+						}
+						
+					}else{//Alumno
+						cout<<"Ingrese la cedula del alumno(8 caracteres)"<<endl;
+						//Hay que verificar si la cedula existe
+						int cedula = 0;
+						do{
+							cin>>cedula;
+							if(cedula>99999999 || cedula<10000000){
+								cout<<"Ingrese un valor valido"<<endl;
+							}
+						}while(cedula>99999999 || cedula<10000000);
+						
+						bool existe = false;
+						for(int x = 0;x<contalm;x++){
+							if(cedula==alm[x]->ced){
+								existe = true;
+								alm[x]->print();
+							}
+						}
+						
+						if(existe==false){
+							cout<<"No existe el alumno"<<endl;
+						}
+					}	
+				
+				}
 				break;
 			case 4://Consultar inscripción
+				{
+					cout<<"Ingrese la cedula del alumno(8 caracteres)"<<endl;
+						//Hay que verificar si la cedula existe
+						int cedula = 0;
+						do{
+							cin>>cedula;
+							if(cedula>99999999 || cedula<10000000){
+								cout<<"Ingrese un valor valido"<<endl;
+							}
+						}while(cedula>99999999 || cedula<10000000);
+					bool existe = false;
+					for(int x = 0;x<contalm;x++){
+							if(cedula==alm[x]->ced){
+								existe = true;
+								alm[x]->print();
+							}
+						}	
+					bool inscribio = false;
+					if(existe==false){
+						cout<<"No se encuentra el alumno"<<endl;
+					}else{
+						
+						for(int x = 0;x<contsmtr;x++){
+							if(cedula==smtr[x]->ced){
+								for(int y = 0;y<contmtr;y++){
+									if(smtr[x]->cod==matr[y]->cod){
+										matr[y]->print();
+									}
+								}
+							}
+						}
+					}
+					
+					if(inscribio==false){
+						cout<<"Este alumno no inscribio materias"<<endl;
+					}
+					
+				}
 				break;
 			case 5://Listado de inscritos en el semestre
 				break;

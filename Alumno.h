@@ -12,8 +12,8 @@ class Alumno {
 		fstream y;
 		Alumno();
 		Alumno(int x, char z[30]);
-		void save(int x, char z[30] );
-		void load(Alumno **al,int contalumn);
+		void save(int x, char z[30],Alumno **al,int& contalumn);
+		void load(Alumno **al,int& contalumn);
 		void print();
 		
 		// Public Declarations

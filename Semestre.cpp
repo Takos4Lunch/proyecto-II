@@ -12,15 +12,17 @@ Semestre::Semestre(int cd, int ce){
 	this->ced = ce;
 }
 
-void Semestre::save(int cd,int ce){
+void Semestre::save(int cd,int ce,Semestre **smtr,int& contsemst){
 	//Probar si el jumpsuit sirve aquí
 	y.open("Inscritos.dat",ios::binary|ios::out|ios::app);
 	y.write((char *)&cd,sizeof(cd));//3
 	y.write((char *)&ce,sizeof(ce));//8
+	smtr[contsemst] = new Semestre(cd,ce);
+	contsemst++;
 	y.close();
 }
 
-void Semestre::load(Semestre **smtr,int contsemst){
+void Semestre::load(Semestre **smtr,int& contsemst){
 	int p = 111;
 	int q = 11111111;
 	int ph;
