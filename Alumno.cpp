@@ -6,14 +6,12 @@ Alumno::Alumno(){
 	
 }
 
-void Alumno::save(){
-	char x[8];
-	y.open("Datos.dat",ios::binary | ios::out);
-	y.read(x,8);
-	for(int i = 0; i < 8; i++){
-		cout<<x[i];	
-	}
-	cout<<endl;
+void Alumno::save(int x,char z[30]){
+	string jumpsuit = "\r\n";
+	y.open("Datos.dat",ios::binary|ios::out|ios::app);
+	y.write((char *)&x,sizeof(x));
+	y.write((char *)z,30);
+	y.write((char *)&jumpsuit,2);
 	y.close();
 }
 

@@ -34,6 +34,7 @@ int main(int argc, char** argv) {
 				i.load();
 				break;
 			case 2://Realizar inscripcion
+			h.save(11112222,"Epale mi pana");
 				break;
 			case 3://Consultar datos
 				break;

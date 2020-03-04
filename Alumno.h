@@ -11,7 +11,7 @@ class Alumno {
 		char nom[30];//Nombre del estudiante
 		fstream y;
 		Alumno();
-		void save();
+		void save(int x, char z[30] );
 		void load();
 		
 		
