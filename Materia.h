@@ -11,7 +11,7 @@ class Materia {
 		char tit[80],uc;//titulo de la materia, unidades de credito
 		fstream y;
 		Materia();
-		void save();
+		void save(int cd, char tt[80],char *uc);
 		void load();
 		
 		// Public Declarations

@@ -7,8 +7,12 @@ Semestre::Semestre(){
 	
 }
 
-void Semestre::save(){
-	
+void Semestre::save(int cd,int ce){
+	//Probar si el jumpsuit sirve aquí
+	y.open("Inscritos.dat",ios::binary|ios::out|ios::app);
+	y.write((char *)&cd,sizeof(cd));//3
+	y.write((char *)&ce,sizeof(ce));//8
+	y.close();
 }
 
 void Semestre::load(){

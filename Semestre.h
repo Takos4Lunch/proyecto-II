@@ -11,7 +11,7 @@ class Semestre {
 		int ced;
 		fstream y;
 		Semestre();
-		void save();
+		void save(int cd,int ce);
 		void load();
 		
 		//Vamos a hacer los metodos a ver si sirve njd

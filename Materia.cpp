@@ -7,8 +7,14 @@ Materia::Materia(){
 	
 }
 
-void Materia::save(){
-	
+void Materia::save(int cd, char tt[80],char *uc){
+	string jumpsuit = "\r\r\n";
+	y.open("Materia.dat",ios::binary|ios::out|ios::app);
+	y.write((char *)&cd,sizeof(cd));
+	y.write((char *)tt,80);
+	y.write((char *)uc,1);
+	y.write((char *)&jumpsuit,3);
+	y.close();
 }
 
 void Materia::load(){

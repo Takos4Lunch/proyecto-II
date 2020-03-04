@@ -28,8 +28,8 @@ void Alumno::load(){//Quizas debería pasarle un array de alumnos para que los gu
 		y.read((char *)&sav,sizeof(p));
 		y.read((char *)&temp,sizeof(temp));
 		y.read((char *)&placeholder,2);//Despues de cada salto de linea hay 2 bytes
-		cout<<sav<<endl;
-		cout<<temp<<endl;	
+		cout<<sav<<endl;//Aqui ya tengo los valores
+		cout<<temp<<endl;//lo que hay que hacer es pasarle a este metodo un arreglo vacio y que lo llene
 	}while(!y.fail());
 	y.close();
 }
